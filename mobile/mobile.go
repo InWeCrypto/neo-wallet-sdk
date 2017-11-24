@@ -33,6 +33,19 @@ func FromWIF(wif string) (*Wallet, error) {
 	}, nil
 }
 
+// New create a new wallet
+func New() (*Wallet, error) {
+	key, err := wallet.NewKey()
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &Wallet{
+		key: key,
+	}, nil
+}
+
 // FromMnemonic create wallet from mnemonic
 func FromMnemonic(mnemonic string) (*Wallet, error) {
 	dic, _ := bip39.GetDict("zh_CN")

@@ -14,5 +14,8 @@
 .glide/
 
 neomobile-sources.jar
+neomobile-sources
 neomobile.aar
 Neomobile.framework
+
+.DS_Store
