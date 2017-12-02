@@ -159,6 +159,8 @@ func (tx *RawTx) GenerateWithSign(key *Key) ([]byte, string, error) {
 
 	sign, err := sign(key.PrivateKey, buff.Bytes())
 
+	logger.DebugF("sign data : %s", hex.EncodeToString(sign))
+
 	if err != nil {
 		return nil, "", err
 	}
@@ -495,13 +497,15 @@ func CalcTxInput(amount float64, unspent []*neogo.UTXO) ([]*neogo.UTXO, float64,
 	for _, utxo := range unspent {
 		var err error
 		selected = append(selected, utxo)
-		vinvalue, err = utxo.Value()
+		val, err := utxo.Value()
 
 		if err != nil {
 			return nil, 0, err
 		}
 
-		if vinvalue > amount {
+		vinvalue += val
+
+		if vinvalue >= amount {
 			return selected, vinvalue, nil
 		}
 	}
@@ -554,6 +558,14 @@ func (s claimSorter) Len() int      { return len(s) }
 func (s claimSorter) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
 
 func (s claimSorter) Less(i, j int) bool {
+
+	// left, _ := strconv.ParseInt(s[i].Vout.Value, 10, 64)
+	// right, _ := strconv.ParseInt(s[j].Vout.Value, 10, 64)
+
+	// if left > right {
+	// 	return true
+	// }
+
 	return s[i].SpentBlock < s[j].SpentBlock
 }
 

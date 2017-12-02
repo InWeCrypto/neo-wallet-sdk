@@ -1,0 +1,119 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "8G3MdcWpgaVSwl1Yh/n6yJo3w5o=",
+			"origin": "github.com/dynamicgo/config/vendor/github.com/Jeffail/gabs",
+			"path": "github.com/Jeffail/gabs",
+			"revision": "aa9e325b771ca815461890c5e5b9be4e42da1633",
+			"revisionTime": "2017-11-26T15:05:34Z"
+		},
+		{
+			"checksumSHA1": "qj/5CGiF+Dsd1/gzKl+8hQ5ByHU=",
+			"path": "github.com/apisit/rfc6979",
+			"revision": "6a90f24967ebb1aa57b22f74a13dbb3faad8cf3d",
+			"revisionTime": "2014-10-03T03:48:18Z"
+		},
+		{
+			"checksumSHA1": "oQgLy8KmIOVov04WXH7KgU1bszc=",
+			"path": "github.com/btcsuite/btcutil/base58",
+			"revision": "5ffa719c3882fd2ec1e8b9f4978066701c31a343",
+			"revisionTime": "2017-06-12T00:02:13Z"
+		},
+		{
+			"checksumSHA1": "OFu4xJEIjiI8Suu+j/gabfp+y6Q=",
+			"origin": "github.com/stretchr/testify/vendor/github.com/davecgh/go-spew/spew",
+			"path": "github.com/davecgh/go-spew/spew",
+			"revision": "890a5c3458b43e6104ff5da8dfa139d013d77544",
+			"revisionTime": "2017-07-05T02:17:15Z"
+		},
+		{
+			"checksumSHA1": "FbcM2THHHwG+T4WbruyMPUdB1X8=",
+			"path": "github.com/dynamicgo/config",
+			"revision": "aa9e325b771ca815461890c5e5b9be4e42da1633",
+			"revisionTime": "2017-11-26T15:05:34Z"
+		},
+		{
+			"checksumSHA1": "XmnYB5Ngjy4J0W+GpnpeKfYSGjs=",
+			"path": "github.com/dynamicgo/slf4go",
+			"revision": "baff4259548c37384c203a03ee15ea2bdae006d4",
+			"revisionTime": "2017-11-14T09:20:35Z"
+		},
+		{
+			"checksumSHA1": "/dtdwt1sRwJY3iQYu2hnR+zRzDI=",
+			"path": "github.com/goany/slf4go",
+			"revision": "73ea855627583a86e254d3fbec479b4a69fc5bc5",
+			"revisionTime": "2017-10-12T06:43:31Z"
+		},
+		{
+			"checksumSHA1": "Q0s0MtMdjVx9pmYRcLDuA2CZSWc=",
+			"path": "github.com/inwecrypto/bip39",
+			"revision": "b9e638f263d99d2eb2a9199b5d957d9fa002ae9d",
+			"revisionTime": "2017-11-24T03:30:40Z"
+		},
+		{
+			"checksumSHA1": "RROIAUNEsm4vOuHEDwi76eK/TJ4=",
+			"origin": "github.com/inwecrypto/neogo/vendor/github.com/inwecrypto/jsonrpc",
+			"path": "github.com/inwecrypto/jsonrpc",
+			"revision": "1b360f43a750e6a3f254f0fd85c4daec75077196",
+			"revisionTime": "2017-11-22T02:22:35Z"
+		},
+		{
+			"checksumSHA1": "23qCkKIA9zy08xQTlKHVzK2zP1c=",
+			"path": "github.com/inwecrypto/keystore",
+			"revision": "87e528249999783dcced9381c5e0981374859f5b",
+			"revisionTime": "2017-11-23T09:47:33Z"
+		},
+		{
+			"checksumSHA1": "VT7M2Ug6mHD8EmGbTWMPJtIApTU=",
+			"path": "github.com/inwecrypto/neogo",
+			"revision": "1b360f43a750e6a3f254f0fd85c4daec75077196",
+			"revisionTime": "2017-11-22T02:22:35Z"
+		},
+		{
+			"checksumSHA1": "sm6sADV6ESYOJmXHfU/D0egDfHc=",
+			"path": "github.com/inwecrypto/sha3",
+			"revision": "d0fd118c5827f1029b6b82df91da54acf5a2f145",
+			"revisionTime": "2017-11-23T09:41:27Z"
+		},
+		{
+			"checksumSHA1": "Se195FlZ160eaEk/uVx4KdTPSxU=",
+			"path": "github.com/pborman/uuid",
+			"revision": "e790cca94e6cc75c7064b1332e63811d4aae1a53",
+			"revisionTime": "2017-06-12T15:36:48Z"
+		},
+		{
+			"checksumSHA1": "zKKp5SZ3d3ycKe4EKMNT0BqAWBw=",
+			"origin": "github.com/stretchr/testify/vendor/github.com/pmezard/go-difflib/difflib",
+			"path": "github.com/pmezard/go-difflib/difflib",
+			"revision": "890a5c3458b43e6104ff5da8dfa139d013d77544",
+			"revisionTime": "2017-07-05T02:17:15Z"
+		},
+		{
+			"checksumSHA1": "mGbTYZ8dHVTiPTTJu3ktp+84pPI=",
+			"path": "github.com/stretchr/testify/assert",
+			"revision": "890a5c3458b43e6104ff5da8dfa139d013d77544",
+			"revisionTime": "2017-07-05T02:17:15Z"
+		},
+		{
+			"checksumSHA1": "1MGpGDQqnUoRpv7VEcQrXOBydXE=",
+			"path": "golang.org/x/crypto/pbkdf2",
+			"revision": "81e90905daefcd6fd217b62423c0908922eadb30",
+			"revisionTime": "2017-08-25T20:24:07Z"
+		},
+		{
+			"checksumSHA1": "y/oIaxq2d3WPizRZfVjo8RCRYTU=",
+			"path": "golang.org/x/crypto/ripemd160",
+			"revision": "81e90905daefcd6fd217b62423c0908922eadb30",
+			"revisionTime": "2017-08-25T20:24:07Z"
+		},
+		{
+			"checksumSHA1": "0NcipKj1ECwxiIrEHQ0wdoL54Sc=",
+			"path": "golang.org/x/crypto/scrypt",
+			"revision": "81e90905daefcd6fd217b62423c0908922eadb30",
+			"revisionTime": "2017-08-25T20:24:07Z"
+		}
+	],
+	"rootPath": "github.com/inwecrypto/neo-wallet-sdk"
+}
