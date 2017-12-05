@@ -7,6 +7,7 @@ import (
 	"encoding/binary"
 	"encoding/hex"
 	"errors"
+	"fmt"
 	"io"
 	"math"
 	"sort"
@@ -86,18 +87,22 @@ const (
 	Remark15       = byte(0xff)
 )
 
-// RawTxSerializable .
-type RawTxSerializable func(writer io.Writer) error
+// RawTxWriter .
+type RawTxWriter func(writer io.Writer) error
+
+// RawTxReader .
+type RawTxReader func(reader io.Reader) error
 
 // RawTx raw transaction object
 type RawTx struct {
-	Type       byte              // transaction type
-	Version    byte              // tx version
-	XData      RawTxSerializable // special tx data
-	Attributes []*RawTxAttr      // tx attribute
-	Inputs     []*RawTxInput     // tx inputs
-	Outputs    []*RawTxOutput    // tx output
-	Scripts    []*RawTxScript    // tx scripts
+	Type        byte           // transaction type
+	Version     byte           // tx version
+	XDataWriter RawTxWriter    // special tx data writer
+	XDataReader RawTxReader    // special tx data reader
+	Attributes  []*RawTxAttr   // tx attribute
+	Inputs      []*RawTxInput  // tx inputs
+	Outputs     []*RawTxOutput // tx output
+	Scripts     []*RawTxScript // tx scripts
 }
 
 // NewRawTx create new raw tx
@@ -185,6 +190,80 @@ func (tx *RawTx) GenerateWithSign(key *Key) ([]byte, string, error) {
 	return buff.Bytes(), hex.EncodeToString(reverseBytes(txid[:])), nil
 }
 
+// ReadBytes read tx from bytes
+func (tx *RawTx) ReadBytes(reader io.Reader) error {
+
+	typeVersion := make([]byte, 2)
+
+	_, err := reader.Read(typeVersion)
+
+	if err != nil {
+		return err
+	}
+
+	tx.Type = typeVersion[0]
+
+	if tx.XDataReader != nil {
+		if err := tx.XDataReader(reader); err != nil {
+			return err
+		}
+	}
+
+	lengthBytes := make([]byte, 1)
+
+	_, err = reader.Read(lengthBytes)
+
+	if err != nil {
+		return err
+	}
+
+	for i := 0; i < int(lengthBytes[0]); i++ {
+		attr := &RawTxAttr{}
+
+		if err := attr.ReadBytes(reader); err != nil {
+			return err
+		}
+
+		tx.Attributes = append(tx.Attributes, attr)
+	}
+
+	_, err = reader.Read(lengthBytes)
+
+	if err != nil {
+		return err
+	}
+
+	for i := 0; i < int(lengthBytes[0]); i++ {
+		input := &RawTxInput{}
+
+		if err := input.ReadBytes(reader); err != nil {
+			return err
+		}
+
+		tx.Inputs = append(tx.Inputs, input)
+	}
+
+	_, err = reader.Read(lengthBytes)
+
+	if err != nil {
+		return err
+	}
+
+	for i := 0; i < int(lengthBytes[0]); i++ {
+		output := &RawTxOutput{}
+
+		if err := output.ReadBytes(reader); err != nil {
+			return err
+		}
+
+		tx.Outputs = append(tx.Outputs, output)
+	}
+
+	scrypt := &RawTxScript{}
+
+	return scrypt.ReadBytes(reader)
+}
+
 func (tx *RawTx) writeSignData(writer io.Writer) error {
 	_, err := writer.Write([]byte{tx.Type, 0x00})
 
@@ -192,8 +271,8 @@ func (tx *RawTx) writeSignData(writer io.Writer) error {
 		return err
 	}
 
-	if tx.XData != nil {
-		if err := tx.XData(writer); err != nil {
+	if tx.XDataWriter != nil {
+		if err := tx.XDataWriter(writer); err != nil {
 			return err
 		}
 	}
@@ -265,6 +344,32 @@ type RawTxAttr struct {
 	Data  []byte
 }
 
+// ReadBytes .
+func (attr *RawTxAttr) ReadBytes(reader io.Reader) error {
+
+	header := make([]byte, 2)
+
+	_, err := reader.Read(header[:1])
+
+	if err != nil {
+		return err
+	}
+
+	// TODO: add special usage code
+	body := make([]byte, int(header[1]))
+
+	_, err = reader.Read(body)
+
+	if err != nil {
+		return err
+	}
+
+	attr.Data = body
+	attr.Usage = header[0]
+
+	return nil
+}
+
 // WriteBytes .
 func (attr *RawTxAttr) WriteBytes(writer io.Writer) error {
 
@@ -295,6 +400,34 @@ func (attr *RawTxAttr) WriteBytes(writer io.Writer) error {
 type RawTxInput struct {
 	TxID string
 	Vout uint16
+}
+
+// ReadBytes .
+func (input *RawTxInput) ReadBytes(reader io.Reader) error {
+
+	txid := make([]byte, 32)
+
+	_, err := reader.Read(txid)
+
+	if err != nil {
+		return err
+	}
+
+	txid = reverseBytes(txid)
+
+	input.TxID = fmt.Sprintf("0x%s", hex.EncodeToString(txid))
+
+	data := make([]byte, 2)
+
+	_, err = reader.Read(data)
+
+	if err != nil {
+		return err
+	}
+
+	input.Vout = binary.LittleEndian.Uint16(data)
+
+	return nil
 }
 
 // WriteBytes .
@@ -330,6 +463,44 @@ type RawTxOutput struct {
 	AssertID string
 	Value    float64
 	Address  string
+}
+
+// ReadBytes .
+func (output *RawTxOutput) ReadBytes(reader io.Reader) error {
+
+	assertID := make([]byte, 32)
+
+	_, err := reader.Read(assertID)
+
+	if err != nil {
+		return err
+	}
+
+	assertID = reverseBytes(assertID)
+
+	output.AssertID = fmt.Sprintf("0x%s", hex.EncodeToString(assertID))
+
+	data := make([]byte, 8)
+
+	_, err = reader.Read(data)
+
+	if err != nil {
+		return err
+	}
+
+	output.Value = float64(binary.LittleEndian.Uint64(data)) / 100000000
+
+	data = make([]byte, 20)
+
+	_, err = reader.Read(data)
+
+	if err != nil {
+		return err
+	}
+
+	output.Address = b58encode(data)
+
+	return nil
 }
 
 // WriteBytes .
@@ -378,6 +549,11 @@ func (output *RawTxOutput) WriteBytes(writer io.Writer) error {
 type RawTxScript struct {
 	StackScript  []byte
 	RedeemScript []byte
+}
+
+// ReadBytes .
+func (script *RawTxScript) ReadBytes(reader io.Reader) error {
+	return nil
 }
 
 // WriteBytes .
@@ -432,9 +608,7 @@ func NewRawClaimTx() *RawClaimTx {
 		RawTx: NewRawTx(ClaimTransaction),
 	}
 
-	tx.RawTx.XData = func(writer io.Writer) error {
-
-		logger.DebugF("======%x", len(tx.Claims))
+	tx.RawTx.XDataWriter = func(writer io.Writer) error {
 
 		_, err := writer.Write([]byte{byte(len(tx.Claims))})
 
