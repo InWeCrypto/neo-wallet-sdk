@@ -124,7 +124,11 @@ func TestSign(t *testing.T) {
 
 func TestGetClaim(t *testing.T) {
 
-	_, err := ReadKeyStore([]byte(`{"address":"Ab8vffxvjaA3JKm3weBg6ChmZMSvorMoBM","crypto":{"cipher":"aes-128-ctr","ciphertext":"c076f3f2d30dd5a0a384e8f3b4503ffa214958707be7fb163a49f0db9ce2ffa5","cipherparams":{"iv":"281ec882c08bbf3cbc6e0994e0e55aef"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":4096,"p":6,"r":8,"salt":"3318a816a722528968412a150363cacea19e8da8820a5d961b66276ac7f3a362"},"mac":"16913516dacd0c54e81d3d5555a50ee87261bc97a115d2fa9b101fbae3ab15c2"},"id":"5cf8ec1a-646f-4051-8b7b-a2d5dfb6edb2","version":3}`), "LEIwenting0411")
+	client := neogo.NewClient(cnf.GetString("testnode", "xxxxx") + "/extend")
+
+	privateKey, _ := hex.DecodeString("4473bf11d103deee68ca3349b0c6e1cf4e5da6ad64e5faa719ea78c77b4321f5")
+
+	key, err := KeyFromPrivateKey(privateKey)
 
 	println(hex.EncodeToString(key.PrivateKey.D.Bytes()))
 
@@ -132,23 +136,11 @@ func TestGetClaim(t *testing.T) {
 
 	assert.NoError(t, err)
 
-	// client := neogo.NewClient(cnf.GetString("testnode", "xxxxx") + "/extend")
+	claims, err := client.GetClaim(key.Address)
 
-	// privateKey, _ := hex.DecodeString("4473bf11d103deee68ca3349b0c6e1cf4e5da6ad64e5faa719ea78c77b4321f5")
+	assert.NoError(t, err)
 
-	// key, err := KeyFromPrivateKey(privateKey)
-
-	// println(hex.EncodeToString(key.PrivateKey.D.Bytes()))
-
-	// // key, err := KeyFromWIF(cnf.GetString("wallet", "xxxxx"))
-
-	// assert.NoError(t, err)
-
-	// claims, err := client.GetClaim(key.Address)
-
-	// assert.NoError(t, err)
-
-	// printResult(claims)
+	printResult(claims)
 }
 
 type testSorter []*neogo.UTXO
