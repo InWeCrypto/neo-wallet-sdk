@@ -22,6 +22,19 @@ func init() {
 	cnf, _ = config.NewFromFile("./test.json")
 }
 
+func trunc(f float64, n int) float64 {
+	data := fmt.Sprintf("%.0f", f)
+
+	r, _ := strconv.ParseFloat(data, 8)
+
+	return r
+}
+
+func TestValue(t *testing.T) {
+	val := int(trunc(float64(0.00013874)*100000000, 8))
+	println(val)
+}
+
 func TestType(t *testing.T) {
 	assert.Equal(t, ClaimTransaction, byte(0x02))
 	assert.Equal(t, ContractTransaction, byte(0x80))
@@ -177,6 +190,8 @@ func TestClaim(t *testing.T) {
 	printResult(claims)
 
 	val, err := strconv.ParseFloat(claims.Available, 8)
+
+	println(val)
 
 	assert.NoError(t, err)
 

@@ -9,8 +9,8 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"math"
 	"sort"
+	"strconv"
 	"strings"
 
 	"github.com/apisit/rfc6979"
@@ -505,6 +505,14 @@ func (output *RawTxOutput) ReadBytes(reader io.Reader) error {
 	return nil
 }
 
+func mathTrunc(f float64, n int) float64 {
+	data := fmt.Sprintf("%.0f", f)
+
+	r, _ := strconv.ParseFloat(data, 8)
+
+	return r
+}
+
 // WriteBytes .
 func (output *RawTxOutput) WriteBytes(writer io.Writer) error {
 
@@ -520,7 +528,9 @@ func (output *RawTxOutput) WriteBytes(writer io.Writer) error {
 		return err
 	}
 
-	value := uint64(math.Floor(output.Value * 100000000))
+	value := uint64(mathTrunc(output.Value*100000000, 8))
+
+	logger.DebugF("vout :%d", value)
 
 	data = make([]byte, 8)
 
