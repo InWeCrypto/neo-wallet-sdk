@@ -1,7 +1,6 @@
 package wallet
 
 import (
-	"bytes"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
@@ -50,25 +49,7 @@ func TestCreateWallet(t *testing.T) {
 
 }
 
-func TestDecode(t *testing.T) {
-
-	tx := NewRawTx(ContractTransaction)
-
-	data, _ := hex.DecodeString("80000002c930bcec3b692760ba942f35f72bfe0c93952c2fc46c623073fa7019e5f360d70000f68270f4677b752f42af2f1187ff07670fc4b2ad6d80f44d53638fc9f70d33790100029b7cffdaa674beae0f930ebe6085af9093e5fe56b34a5c220ccdcf6efc336fc500e1f505000000007ee3a05ea28c7949b5f23d61c1fae05b754aec8c9b7cffdaa674beae0f930ebe6085af9093e5fe56b34a5c220ccdcf6efc336fc50046c323000000007ee3a05ea28c7949b5f23d61c1fae05b754aec8c0141409efc951b794751c7ddfa8c1d8d2fb13d0b964ff5837fcf9ab17231db4532e03951ca3d5f46f06fe67b12737ade5d49d0e74ec1ab7c7fd5988289aa85941373bc232103aa0047673b0bf10f936bb45a909bc70eeef396de934429c796ad496d94911820ac")
-
-	err := tx.ReadBytes(bytes.NewReader(data))
-
-	assert.NoError(t, err)
-
-	fmt.Printf("%v %v", tx.Inputs[0], tx.Inputs[1])
-
-	fmt.Printf("%v %v", tx.Outputs[0], tx.Outputs[1])
-
-}
-
 func TestSign(t *testing.T) {
-
-	println(len("a8df4d95555eb467c5db2876f949de41e0772b38e1d898536cab32288821013d"))
 
 	client := neogo.NewClient(cnf.GetString("testnode", "xxxxx") + "/extend")
 
@@ -79,8 +60,6 @@ func TestSign(t *testing.T) {
 	utxos, err := client.GetBalance(key.Address, "0xc56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b")
 
 	assert.NoError(t, err)
-
-	utxos[0], utxos[1] = utxos[1], utxos[0]
 
 	printResult(utxos)
 
@@ -140,9 +119,16 @@ func TestSign(t *testing.T) {
 }
 
 func TestGetClaim(t *testing.T) {
-	client := neogo.NewClient(cnf.GetString("testnode", "xxxxx") + "/extend")
+	client := neogo.NewClient(cnf.GetString("mainnet", "xxxxx") + "/extend")
 
-	key, err := KeyFromWIF(cnf.GetString("wallet", "xxxxx"))
+	key, err := ReadKeyStore(
+		[]byte(`{"address":"Ab8vffxvjaA3JKm3weBg6ChmZMSvorMoBM","crypto":{"cipher":"aes-128-ctr","ciphertext":"c076f3f2d30dd5a0a384e8f3b4503ffa214958707be7fb163a49f0db9ce2ffa5","cipherparams":{"iv":"281ec882c08bbf3cbc6e0994e0e55aef"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":4096,"p":6,"r":8,"salt":"3318a816a722528968412a150363cacea19e8da8820a5d961b66276ac7f3a362"},"mac":"16913516dacd0c54e81d3d5555a50ee87261bc97a115d2fa9b101fbae3ab15c2"},"id":"5cf8ec1a-646f-4051-8b7b-a2d5dfb6edb2","version":3}`),
+		"Xiaoji123",
+	)
+
+	println(hex.EncodeToString(key.PrivateKey.D.Bytes()))
+
+	// key, err := KeyFromWIF(cnf.GetString("wallet", "xxxxx"))
 
 	assert.NoError(t, err)
 
@@ -169,7 +155,9 @@ func (s testSorter) Less(i, j int) bool {
 func TestClaim(t *testing.T) {
 	client := neogo.NewClient(cnf.GetString("testnode", "xxxxx") + "/extend")
 
-	key, err := KeyFromWIF(cnf.GetString("wallet", "xxxxx"))
+	privateKey, _ := hex.DecodeString("4473bf11d103deee68ca3349b0c6e1cf4e5da6ad64e5faa719ea78c77b4321f5")
+
+	key, err := KeyFromPrivateKey(privateKey)
 
 	assert.NoError(t, err)
 

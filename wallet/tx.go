@@ -733,13 +733,6 @@ func (s claimSorter) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
 
 func (s claimSorter) Less(i, j int) bool {
 
-	// left, _ := strconv.ParseInt(s[i].Vout.Value, 10, 64)
-	// right, _ := strconv.ParseInt(s[j].Vout.Value, 10, 64)
-
-	// if left > right {
-	// 	return true
-	// }
-
 	return s[i].SpentBlock < s[j].SpentBlock
 }
 
