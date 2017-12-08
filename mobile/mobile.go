@@ -56,6 +56,10 @@ func FromMnemonic(mnemonic string) (*Wallet, error) {
 		return nil, err
 	}
 
+	data = data[1 : len(data)-1]
+
+	println(hex.EncodeToString(data))
+
 	key, err := wallet.KeyFromPrivateKey(data)
 
 	if err != nil {
@@ -119,6 +123,8 @@ func (wrapper *Wallet) Mnemonic() (string, error) {
 	privateKeyBytes := wrapper.key.ToBytes()
 
 	dic, _ := bip39.GetDict("zh_CN")
+
+	println(hex.EncodeToString(privateKeyBytes))
 
 	data, err := bip39.NewMnemonic(privateKeyBytes, dic)
 

@@ -2,10 +2,38 @@ package wallet
 
 import (
 	"encoding/hex"
+	"strings"
 	"testing"
 
+	"github.com/inwecrypto/bip39"
 	"github.com/stretchr/testify/assert"
 )
+
+func TestMnemonic(t *testing.T) {
+	key, _ := KeyFromWIF("L4sSGSGh15dtocMMSYS115fhZEVN9UuETWDjgGKu2JDu59yncyVf")
+
+	privateKeyBytes := key.ToBytes()
+
+	dic, _ := bip39.GetDict("en_US")
+
+	data, _ := bip39.NewMnemonic(privateKeyBytes, dic)
+
+	println(len(privateKeyBytes), len(strings.Split(data, " ")))
+
+	data2, err := bip39.MnemonicToByteArray(data, dic)
+
+	data2 = data2[1 : len(data2)-1]
+
+	assert.NoError(t, err)
+
+	assert.Equal(t, privateKeyBytes, data2)
+
+	key2, err := KeyFromPrivateKey(data2)
+
+	assert.NoError(t, err)
+
+	assert.Equal(t, key.Address, key2.Address)
+}
 
 func TestNEOAddress(t *testing.T) {
 	key, err := KeyFromWIF("L4Ns4Uh4WegsHxgDG49hohAYxuhj41hhxG6owjjTWg95GSrRRbLL")
