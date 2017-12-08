@@ -162,6 +162,8 @@ func (tx *RawTx) GenerateWithSign(key *Key) ([]byte, string, error) {
 
 	txid = sha256.Sum256(txid[:])
 
+	logger.DebugF("sign target data : %s", hex.EncodeToString(buff.Bytes()))
+
 	sign, err := sign(key.PrivateKey, buff.Bytes())
 
 	logger.DebugF("sign data : %s", hex.EncodeToString(sign))
