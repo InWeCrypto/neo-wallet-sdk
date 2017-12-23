@@ -56,20 +56,26 @@
 			"checksumSHA1": "RROIAUNEsm4vOuHEDwi76eK/TJ4=",
 			"origin": "github.com/inwecrypto/neogo/vendor/github.com/inwecrypto/jsonrpc",
 			"path": "github.com/inwecrypto/jsonrpc",
-			"revision": "1b360f43a750e6a3f254f0fd85c4daec75077196",
-			"revisionTime": "2017-11-22T02:22:35Z"
+			"revision": "189e7332b82b5416dc6401e50c5134b84bff82ff",
+			"revisionTime": "2017-12-23T12:41:48Z"
 		},
 		{
-			"checksumSHA1": "23qCkKIA9zy08xQTlKHVzK2zP1c=",
+			"checksumSHA1": "qKe/OzkcXSVrsb/6DvlXzSjojzU=",
 			"path": "github.com/inwecrypto/keystore",
 			"revision": "87e528249999783dcced9381c5e0981374859f5b",
 			"revisionTime": "2017-11-23T09:47:33Z"
 		},
 		{
-			"checksumSHA1": "VT7M2Ug6mHD8EmGbTWMPJtIApTU=",
+			"checksumSHA1": "S8MnemxGV5AarOL3Dpc1IS3L/is=",
 			"path": "github.com/inwecrypto/neogo",
-			"revision": "1b360f43a750e6a3f254f0fd85c4daec75077196",
-			"revisionTime": "2017-11-22T02:22:35Z"
+			"revision": "189e7332b82b5416dc6401e50c5134b84bff82ff",
+			"revisionTime": "2017-12-23T12:41:48Z"
+		},
+		{
+			"checksumSHA1": "As2CKeXDKtAM2Qd0H3vnBizvOQI=",
+			"path": "github.com/inwecrypto/neogo/nep5",
+			"revision": "189e7332b82b5416dc6401e50c5134b84bff82ff",
+			"revisionTime": "2017-12-23T12:41:48Z"
 		},
 		{
 			"checksumSHA1": "sm6sADV6ESYOJmXHfU/D0egDfHc=",

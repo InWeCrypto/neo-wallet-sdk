@@ -35,6 +35,14 @@ func TestValue(t *testing.T) {
 	println(val)
 }
 
+func TestAddress(t *testing.T) {
+	bytes, _ := decodeAddress("AJ6hqJYnyLLmCT6Cfb7m1R3aXQAEWbeVVo")
+
+	println(hex.EncodeToString(bytes))
+
+	println(b58checkencodeNEO(0x17, bytes))
+}
+
 func TestType(t *testing.T) {
 	assert.Equal(t, ClaimTransaction, byte(0x02))
 	assert.Equal(t, ContractTransaction, byte(0x80))
@@ -139,13 +147,13 @@ func TestGetClaim(t *testing.T) {
 
 	client := neogo.NewClient(cnf.GetString("testnode", "xxxxx") + "/extend")
 
-	privateKey, _ := hex.DecodeString("4473bf11d103deee68ca3349b0c6e1cf4e5da6ad64e5faa719ea78c77b4321f5")
+	// privateKey, _ := hex.DecodeString("4473bf11d103deee68ca3349b0c6e1cf4e5da6ad64e5faa719ea78c77b4321f5")
 
-	key, err := KeyFromPrivateKey(privateKey)
+	// key, err := KeyFromPrivateKey(privateKey)
 
-	println(hex.EncodeToString(key.PrivateKey.D.Bytes()))
+	// println(hex.EncodeToString(key.PrivateKey.D.Bytes()))
 
-	// key, err := KeyFromWIF(cnf.GetString("wallet", "xxxxx"))
+	key, err := KeyFromWIF(cnf.GetString("wallet", "xxxxx"))
 
 	assert.NoError(t, err)
 

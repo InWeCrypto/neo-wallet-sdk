@@ -9,6 +9,8 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"math"
+	"math/big"
 	"sort"
 	"strconv"
 	"strings"
@@ -17,6 +19,7 @@ import (
 	"github.com/btcsuite/btcutil/base58"
 	"github.com/goany/slf4go"
 	"github.com/inwecrypto/neogo"
+	"github.com/inwecrypto/neogo/nep5"
 )
 
 var logger = slf4go.Get("wallet")
@@ -608,6 +611,52 @@ func (script *RawTxScript) WriteBytes(writer io.Writer) error {
 	return nil
 }
 
+// RawInvocationTx .
+type RawInvocationTx struct {
+	*RawTx
+	Script []byte
+	Gas    int64
+}
+
+// NewInvocationTx .
+func NewInvocationTx(script []byte, gas int64) *RawInvocationTx {
+	tx := &RawInvocationTx{
+		RawTx:  NewRawTx(InvocationTransaction),
+		Script: script,
+		Gas:    gas,
+	}
+
+	tx.RawTx.XDataWriter = func(writer io.Writer) error {
+
+		if len(script) <= math.MaxUint16 {
+			flag := byte(0xFD)
+			buff := make([]byte, 2)
+			binary.LittleEndian.PutUint16(buff, uint16(len(script)))
+			writer.Write(append([]byte{flag}, buff...))
+
+		} else if len(script) <= math.MaxUint32 {
+			flag := byte(0xFE)
+			buff := make([]byte, 4)
+			binary.LittleEndian.PutUint32(buff, uint32(len(script)))
+			writer.Write(append([]byte{flag}, buff...))
+		} else {
+			flag := byte(0xFF)
+			buff := make([]byte, 8)
+			binary.LittleEndian.PutUint64(buff, uint64(len(script)))
+			writer.Write(append([]byte{flag}, buff...))
+		}
+
+		buff := make([]byte, 8)
+		binary.LittleEndian.PutUint64(buff, uint64(gas))
+
+		writer.Write(buff)
+
+		return nil
+	}
+
+	return tx
+}
+
 // RawClaimTx .
 type RawClaimTx struct {
 	*RawTx
@@ -766,6 +815,32 @@ func CreateClaimTx(val float64, address string, unspent []*neogo.UTXO) (*RawTx, 
 		Value:    val,
 		Address:  address,
 	})
+
+	return tx.RawTx, nil
+}
+
+// Nep5Transfer create nep5 transfer tx
+func Nep5Transfer(scriptHash []byte, from string, to string, amount *big.Int, gas int64) (*RawTx, error) {
+
+	fromBytes, err := decodeAddress(from)
+
+	if err != nil {
+		return nil, err
+	}
+
+	toBytes, err := decodeAddress(to)
+
+	if err != nil {
+		return nil, err
+	}
+
+	script, err := nep5.Transfer(scriptHash, fromBytes, toBytes, amount)
+
+	if err != nil {
+		return nil, err
+	}
+
+	tx := NewInvocationTx(script, gas)
 
 	return tx.RawTx, nil
 }
