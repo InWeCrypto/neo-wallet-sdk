@@ -323,3 +323,195 @@ public class App {
 Parameter | Type | Description
 --------- | ---- | -----------
 Mnemonic | string | neo keystore 助记词
+
+
+
+## NEP5转账
+
+> nep5 transfer:
+
+```java
+package com.inwecrypto.test
+
+public class App {
+    public static void main(String args[]) {
+        neomobile.Wallet neowallet = neomobile.fromMnemonic("xxxxxx");
+
+        neowallet.CreateNep5Tx("script hash","from address","to address",10.1,1000,unspent)
+    }
+}
+```
+
+> unspent 参数示例：
+
+```json
+[{
+    "txid": "0x07537a82ef57610931cffe3e31ca5f38dbadc9daa2c2c881a49d9a984539ed06",
+    "vout": {
+        "Address": "AMpupnF6QweQXLfCtF4dR45FDdKbTXkLsr",
+        "Asset": "0xc56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b",
+        "N": 0,
+        "Value": "1"
+    },
+    "createTime": "2017-11-23T12:58:31Z",
+    "spentTime": "2017-11-24T06:38:04Z",
+    "block": 809098,
+    "spentBlock": 811513
+}, {
+    "txid": "0x07537a82ef57610931cffe3e31ca5f38dbadc9daa2c2c881a49d9a984539ed06",
+    "vout": {
+        "Address": "AMpupnF6QweQXLfCtF4dR45FDdKbTXkLsr",
+        "Asset": "0xc56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b",
+        "N": 0,
+        "Value": "1"
+    },
+    "createTime": "2017-11-23T12:58:31Z",
+    "spentTime": "2017-11-24T06:38:04Z",
+    "block": 809098,
+    "spentBlock": 811513
+}]
+```
+
+### 请求参数
+
+Parameter | Type | Description
+--------- | ---- | -----------
+scritpHash | string | nep5 合约地址
+from | string | 转账源地址
+to | string | 转账目标地址
+gas| float64| 转账消耗的gas费用
+amount| int64| 转账代币数目
+unspent|json|当前账户可用全局资产列表
+
+
+### 返回值
+
+
+Parameter | Type | Description
+--------- | ---- | -----------
+tx | object | 包含 txid 以及 raw tx string
+
+## NEP5 ICO
+
+> nep5 mintToken:
+
+```java
+package com.inwecrypto.test
+
+public class App {
+    public static void main(String args[]) {
+        neomobile.Wallet neowallet = neomobile.fromMnemonic("xxxxxx");
+
+        neowallet.MintToken("script hash",10.1,1000,unspent)
+    }
+}
+```
+
+> unspent 参数示例：
+
+```json
+[{
+    "txid": "0x07537a82ef57610931cffe3e31ca5f38dbadc9daa2c2c881a49d9a984539ed06",
+    "vout": {
+        "Address": "AMpupnF6QweQXLfCtF4dR45FDdKbTXkLsr",
+        "Asset": "0xc56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b",
+        "N": 0,
+        "Value": "1"
+    },
+    "createTime": "2017-11-23T12:58:31Z",
+    "spentTime": "2017-11-24T06:38:04Z",
+    "block": 809098,
+    "spentBlock": 811513
+}, {
+    "txid": "0x07537a82ef57610931cffe3e31ca5f38dbadc9daa2c2c881a49d9a984539ed06",
+    "vout": {
+        "Address": "AMpupnF6QweQXLfCtF4dR45FDdKbTXkLsr",
+        "Asset": "0xc56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b",
+        "N": 0,
+        "Value": "1"
+    },
+    "createTime": "2017-11-23T12:58:31Z",
+    "spentTime": "2017-11-24T06:38:04Z",
+    "block": 809098,
+    "spentBlock": 811513
+}]
+```
+
+### 请求参数
+
+Parameter | Type | Description
+--------- | ---- | -----------
+scritpHash | string | nep5 合约地址
+gas| float64| 转账消耗的gas费用
+amount| int64| 转账代币数目
+unspent|json|当前账户可用全局资产列表
+
+
+### 返回值
+
+
+Parameter | Type | Description
+--------- | ---- | -----------
+tx | object | 包含 txid 以及 raw tx string
+
+
+## NEO地址转换为Hash160格式
+
+> NEO address to Hash160:
+
+```java
+package com.inwecrypto.test
+
+public class App {
+    public static void main(String args[]) {
+        neomobile.DecodeAddress("ATLoURz25z4PpsrzZmnowRT3dya44LGEpS")
+    }
+}
+```
+
+
+### 请求参数
+
+Parameter | Type | Description
+--------- | ---- | -----------
+address | string | NEO 地址
+
+
+### 返回值
+
+
+Parameter | Type | Description
+--------- | ---- | -----------
+address | hash160 string | hash160 address string
+
+
+## Hash160格式地址转换为NEO地址
+
+> NEO address to Hash160:
+
+```java
+package com.inwecrypto.test
+
+public class App {
+    public static void main(String args[]) {
+        neomobile.EncodeAddress("bfc469dd56932409677278f6b7422f3e1f34481d")
+    }
+}
+```
+
+
+### 请求参数
+
+Parameter | Type | Description
+--------- | ---- | -----------
+address | hash160 string | hash160 address string
+
+
+
+
+### 返回值
+
+
+Parameter | Type | Description
+--------- | ---- | -----------
+address | string | NEO 地址

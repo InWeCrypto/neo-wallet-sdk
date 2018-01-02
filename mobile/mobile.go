@@ -285,3 +285,30 @@ func reverseBytes(s []byte) []byte {
 
 	return s
 }
+
+// DecodeAddress decode address
+func DecodeAddress(address string) (string, error) {
+	bytesOfAddress, err := neotx.DecodeAddress(address)
+
+	if err != nil {
+		return "", err
+	}
+
+	bytesOfAddress = reverseBytes(bytesOfAddress)
+
+	return hex.EncodeToString(bytesOfAddress), nil
+}
+
+// EncodeAddress encode address
+func EncodeAddress(address string) (string, error) {
+
+	bytesOfAddress, err := hex.DecodeString(strings.TrimPrefix(address, "0x"))
+
+	if err != nil {
+		return "", err
+	}
+
+	bytesOfAddress = reverseBytes(bytesOfAddress)
+
+	return neotx.EncodeAddress(bytesOfAddress), nil
+}
