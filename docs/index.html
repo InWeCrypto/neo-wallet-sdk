@@ -437,6 +437,394 @@
 </tbody>
 </table>
 
+<h2 id="获取地址">获取地址</h2>
+
+<blockquote>
+<p>get neo address:</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.inwecrypto.test</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
+        <span class="n">neomobile</span><span class="o">.</span><span class="na">Wallet</span> <span class="n">neowallet</span> <span class="o">=</span> <span class="n">neomobile</span><span class="o">.</span><span class="na">fromMnemonic</span><span class="o">(</span><span class="s">&#34;xxxxxx&#34;</span><span class="o">);</span>
+
+        <span class="n">neowallet</span><span class="o">.</span><span class="na">address</span><span class="o">()</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
+<h3 id="请求参数-6">请求参数</h3>
+
+<h3 id="返回值-2">返回值</h3>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>neo 地址</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="生成助记词">生成助记词</h2>
+
+<blockquote>
+<p>generate mnemonic:</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.inwecrypto.test</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
+        <span class="n">neomobile</span><span class="o">.</span><span class="na">Wallet</span> <span class="n">neowallet</span> <span class="o">=</span> <span class="n">neomobile</span><span class="o">.</span><span class="na">fromMnemonic</span><span class="o">(</span><span class="s">&#34;xxxxxx&#34;</span><span class="o">);</span>
+
+        <span class="n">neowallet</span><span class="o">.</span><span class="na">Mnemonic</span><span class="o">()</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
+<h3 id="请求参数-7">请求参数</h3>
+
+<h3 id="返回值-3">返回值</h3>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Mnemonic</td>
+<td>string</td>
+<td>neo keystore 助记词</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="nep5转账">NEP5转账</h2>
+
+<blockquote>
+<p>nep5 transfer:</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.inwecrypto.test</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
+        <span class="n">neomobile</span><span class="o">.</span><span class="na">Wallet</span> <span class="n">neowallet</span> <span class="o">=</span> <span class="n">neomobile</span><span class="o">.</span><span class="na">fromMnemonic</span><span class="o">(</span><span class="s">&#34;xxxxxx&#34;</span><span class="o">);</span>
+
+        <span class="n">neowallet</span><span class="o">.</span><span class="na">CreateNep5Tx</span><span class="o">(</span><span class="s">&#34;script hash&#34;</span><span class="o">,</span><span class="s">&#34;from address&#34;</span><span class="o">,</span><span class="s">&#34;to address&#34;</span><span class="o">,</span><span class="n">10</span><span class="o">.</span><span class="na">1</span><span class="o">,</span><span class="n">1000</span><span class="o">,</span><span class="n">unspent</span><span class="o">)</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
+<blockquote>
+<p>unspent 参数示例：</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">[{</span>
+    <span class="nt">&#34;txid&#34;</span><span class="p">:</span> <span class="s2">&#34;0x07537a82ef57610931cffe3e31ca5f38dbadc9daa2c2c881a49d9a984539ed06&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;vout&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;Address&#34;</span><span class="p">:</span> <span class="s2">&#34;AMpupnF6QweQXLfCtF4dR45FDdKbTXkLsr&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;Asset&#34;</span><span class="p">:</span> <span class="s2">&#34;0xc56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;N&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&#34;Value&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;createTime&#34;</span><span class="p">:</span> <span class="s2">&#34;2017-11-23T12:58:31Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;spentTime&#34;</span><span class="p">:</span> <span class="s2">&#34;2017-11-24T06:38:04Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;block&#34;</span><span class="p">:</span> <span class="mi">809098</span><span class="p">,</span>
+    <span class="nt">&#34;spentBlock&#34;</span><span class="p">:</span> <span class="mi">811513</span>
+<span class="p">},</span> <span class="p">{</span>
+    <span class="nt">&#34;txid&#34;</span><span class="p">:</span> <span class="s2">&#34;0x07537a82ef57610931cffe3e31ca5f38dbadc9daa2c2c881a49d9a984539ed06&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;vout&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;Address&#34;</span><span class="p">:</span> <span class="s2">&#34;AMpupnF6QweQXLfCtF4dR45FDdKbTXkLsr&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;Asset&#34;</span><span class="p">:</span> <span class="s2">&#34;0xc56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;N&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&#34;Value&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;createTime&#34;</span><span class="p">:</span> <span class="s2">&#34;2017-11-23T12:58:31Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;spentTime&#34;</span><span class="p">:</span> <span class="s2">&#34;2017-11-24T06:38:04Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;block&#34;</span><span class="p">:</span> <span class="mi">809098</span><span class="p">,</span>
+    <span class="nt">&#34;spentBlock&#34;</span><span class="p">:</span> <span class="mi">811513</span>
+<span class="p">}]</span></code></pre></div>
+<h3 id="请求参数-8">请求参数</h3>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>scritpHash</td>
+<td>string</td>
+<td>nep5 合约地址</td>
+</tr>
+
+<tr>
+<td>from</td>
+<td>string</td>
+<td>转账源地址</td>
+</tr>
+
+<tr>
+<td>to</td>
+<td>string</td>
+<td>转账目标地址</td>
+</tr>
+
+<tr>
+<td>gas</td>
+<td>float64</td>
+<td>转账消耗的gas费用</td>
+</tr>
+
+<tr>
+<td>amount</td>
+<td>int64</td>
+<td>转账代币数目</td>
+</tr>
+
+<tr>
+<td>unspent</td>
+<td>json</td>
+<td>当前账户可用全局资产列表</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="返回值-4">返回值</h3>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>tx</td>
+<td>object</td>
+<td>包含 txid 以及 raw tx string</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="nep5-ico">NEP5 ICO</h2>
+
+<blockquote>
+<p>nep5 mintToken:</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.inwecrypto.test</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
+        <span class="n">neomobile</span><span class="o">.</span><span class="na">Wallet</span> <span class="n">neowallet</span> <span class="o">=</span> <span class="n">neomobile</span><span class="o">.</span><span class="na">fromMnemonic</span><span class="o">(</span><span class="s">&#34;xxxxxx&#34;</span><span class="o">);</span>
+
+        <span class="n">neowallet</span><span class="o">.</span><span class="na">MintToken</span><span class="o">(</span><span class="s">&#34;script hash&#34;</span><span class="o">,</span><span class="n">10</span><span class="o">.</span><span class="na">1</span><span class="o">,</span><span class="n">1000</span><span class="o">,</span><span class="n">unspent</span><span class="o">)</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
+<blockquote>
+<p>unspent 参数示例：</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">[{</span>
+    <span class="nt">&#34;txid&#34;</span><span class="p">:</span> <span class="s2">&#34;0x07537a82ef57610931cffe3e31ca5f38dbadc9daa2c2c881a49d9a984539ed06&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;vout&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;Address&#34;</span><span class="p">:</span> <span class="s2">&#34;AMpupnF6QweQXLfCtF4dR45FDdKbTXkLsr&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;Asset&#34;</span><span class="p">:</span> <span class="s2">&#34;0xc56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;N&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&#34;Value&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;createTime&#34;</span><span class="p">:</span> <span class="s2">&#34;2017-11-23T12:58:31Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;spentTime&#34;</span><span class="p">:</span> <span class="s2">&#34;2017-11-24T06:38:04Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;block&#34;</span><span class="p">:</span> <span class="mi">809098</span><span class="p">,</span>
+    <span class="nt">&#34;spentBlock&#34;</span><span class="p">:</span> <span class="mi">811513</span>
+<span class="p">},</span> <span class="p">{</span>
+    <span class="nt">&#34;txid&#34;</span><span class="p">:</span> <span class="s2">&#34;0x07537a82ef57610931cffe3e31ca5f38dbadc9daa2c2c881a49d9a984539ed06&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;vout&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;Address&#34;</span><span class="p">:</span> <span class="s2">&#34;AMpupnF6QweQXLfCtF4dR45FDdKbTXkLsr&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;Asset&#34;</span><span class="p">:</span> <span class="s2">&#34;0xc56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;N&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&#34;Value&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;createTime&#34;</span><span class="p">:</span> <span class="s2">&#34;2017-11-23T12:58:31Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;spentTime&#34;</span><span class="p">:</span> <span class="s2">&#34;2017-11-24T06:38:04Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;block&#34;</span><span class="p">:</span> <span class="mi">809098</span><span class="p">,</span>
+    <span class="nt">&#34;spentBlock&#34;</span><span class="p">:</span> <span class="mi">811513</span>
+<span class="p">}]</span></code></pre></div>
+<h3 id="请求参数-9">请求参数</h3>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>scritpHash</td>
+<td>string</td>
+<td>nep5 合约地址</td>
+</tr>
+
+<tr>
+<td>gas</td>
+<td>float64</td>
+<td>转账消耗的gas费用</td>
+</tr>
+
+<tr>
+<td>amount</td>
+<td>int64</td>
+<td>转账代币数目</td>
+</tr>
+
+<tr>
+<td>unspent</td>
+<td>json</td>
+<td>当前账户可用全局资产列表</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="返回值-5">返回值</h3>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>tx</td>
+<td>object</td>
+<td>包含 txid 以及 raw tx string</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="neo地址转换为hash160格式">NEO地址转换为Hash160格式</h2>
+
+<blockquote>
+<p>NEO address to Hash160:</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.inwecrypto.test</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
+        <span class="n">neomobile</span><span class="o">.</span><span class="na">DecodeAddress</span><span class="o">(</span><span class="s">&#34;ATLoURz25z4PpsrzZmnowRT3dya44LGEpS&#34;</span><span class="o">)</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
+<h3 id="请求参数-10">请求参数</h3>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>NEO 地址</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="返回值-6">返回值</h3>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>address</td>
+<td>hash160 string</td>
+<td>hash160 address string</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="hash160格式地址转换为neo地址">Hash160格式地址转换为NEO地址</h2>
+
+<blockquote>
+<p>NEO address to Hash160:</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.inwecrypto.test</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
+        <span class="n">neomobile</span><span class="o">.</span><span class="na">EncodeAddress</span><span class="o">(</span><span class="s">&#34;bfc469dd56932409677278f6b7422f3e1f34481d&#34;</span><span class="o">)</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
+<h3 id="请求参数-11">请求参数</h3>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>address</td>
+<td>hash160 string</td>
+<td>hash160 address string</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="返回值-7">返回值</h3>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>NEO 地址</td>
+</tr>
+</tbody>
+</table>
+
     
         
 

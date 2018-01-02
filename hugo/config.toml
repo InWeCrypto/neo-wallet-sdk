@@ -1,5 +1,5 @@
 theme = "docuapi"
-publishdir="../doc"
+publishdir="../docs"
 languageCode = "zh-CN"
 baseurl = "https://inwecrypto.github.io/neo-wallet-sdk/"
 title = "neo wallet mobile sdk"
