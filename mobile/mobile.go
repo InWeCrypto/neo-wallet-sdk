@@ -3,15 +3,19 @@ package neomobile
 import (
 	"encoding/hex"
 	"encoding/json"
+	"math/big"
+	"strings"
 
 	"github.com/inwecrypto/bip39"
-	"github.com/inwecrypto/neo-wallet-sdk/wallet"
 	"github.com/inwecrypto/neogo"
+	"github.com/inwecrypto/neogo/keystore"
+	"github.com/inwecrypto/neogo/nep5"
+	neotx "github.com/inwecrypto/neogo/tx"
 )
 
 // Wallet neo mobile wallet
 type Wallet struct {
-	key *wallet.Key
+	key *keystore.Key
 }
 
 // Tx neo rawtx wrapper
@@ -22,7 +26,7 @@ type Tx struct {
 
 // FromWIF create wallet from wif
 func FromWIF(wif string) (*Wallet, error) {
-	key, err := wallet.KeyFromWIF(wif)
+	key, err := keystore.KeyFromWIF(wif)
 
 	if err != nil {
 		return nil, err
@@ -35,7 +39,7 @@ func FromWIF(wif string) (*Wallet, error) {
 
 // New create a new wallet
 func New() (*Wallet, error) {
-	key, err := wallet.NewKey()
+	key, err := keystore.NewKey()
 
 	if err != nil {
 		return nil, err
@@ -60,7 +64,7 @@ func FromMnemonic(mnemonic string) (*Wallet, error) {
 
 	println(hex.EncodeToString(data))
 
-	key, err := wallet.KeyFromPrivateKey(data)
+	key, err := keystore.KeyFromPrivateKey(data)
 
 	if err != nil {
 		return nil, err
@@ -72,8 +76,8 @@ func FromMnemonic(mnemonic string) (*Wallet, error) {
 }
 
 // FromKeyStore create wallet from keystore
-func FromKeyStore(keystore string, password string) (*Wallet, error) {
-	key, err := wallet.ReadKeyStore([]byte(keystore), password)
+func FromKeyStore(ks string, password string) (*Wallet, error) {
+	key, err := keystore.ReadKeyStore([]byte(ks), password)
 
 	if err != nil {
 		return nil, err
@@ -86,7 +90,7 @@ func FromKeyStore(keystore string, password string) (*Wallet, error) {
 
 // ToKeyStore write wallet to keystore format string
 func (wrapper *Wallet) ToKeyStore(password string) (string, error) {
-	keystore, err := wallet.WriteLightScryptKeyStore(wrapper.key, password)
+	keystore, err := keystore.WriteLightScryptKeyStore(wrapper.key, password)
 
 	return string(keystore), err
 }
@@ -99,13 +103,29 @@ func (wrapper *Wallet) CreateAssertTx(assert, from, to string, amount float64, u
 		return nil, err
 	}
 
-	tx, err := wallet.CreateSendAssertTx(assert, from, to, amount, utxos)
+	vout := []*neotx.Vout{
+		&neotx.Vout{
+			Asset:   assert,
+			Value:   neotx.MakeFixed8(amount),
+			Address: to,
+		},
+	}
+
+	tx := neotx.NewContractTx()
+
+	err := tx.CalcInputs(vout, utxos)
 
 	if err != nil {
 		return nil, err
 	}
 
-	rawtxdata, txid, err := tx.GenerateWithSign(wrapper.key)
+	// tx, err := neotx.CreateSendAssertTx(assert, from, to, amount, utxos)
+
+	// if err != nil {
+	// 	return nil, err
+	// }
+
+	rawtxdata, txid, err := tx.Tx().Sign(wrapper.key.PrivateKey)
 
 	return &Tx{
 		Data: hex.EncodeToString(rawtxdata),
@@ -143,16 +163,125 @@ func (wrapper *Wallet) CreateClaimTx(amount float64, address string, unspent str
 		return nil, err
 	}
 
-	tx, err := wallet.CreateClaimTx(amount, address, utxos)
+	tx := neotx.NewClaimTx()
+
+	err := tx.Claim(amount, address, utxos)
 
 	if err != nil {
 		return nil, err
 	}
 
-	rawtxdata, txid, err := tx.GenerateWithSign(wrapper.key)
+	rawtxdata, txid, err := tx.Tx().Sign(wrapper.key.PrivateKey)
 
 	return &Tx{
 		Data: hex.EncodeToString(rawtxdata),
 		ID:   txid,
 	}, err
+}
+
+// MintToken .
+func (wrapper *Wallet) MintToken(asset string, gas, amount float64, unspent string) (*Tx, error) {
+	var utxos []*neogo.UTXO
+
+	if err := json.Unmarshal([]byte(unspent), &utxos); err != nil {
+		return nil, err
+	}
+
+	scriptHash, err := hex.DecodeString(strings.TrimPrefix(asset, "0x"))
+
+	if err != nil {
+		return nil, err
+	}
+
+	scriptHash = reverseBytes(scriptHash)
+
+	address := neotx.EncodeAddress(scriptHash)
+
+	script, err := nep5.MintToken(scriptHash)
+
+	if err != nil {
+		return nil, err
+	}
+
+	tx := neotx.NewInvocationTx(script, gas)
+
+	vout := []*neotx.Vout{
+		&neotx.Vout{
+			Asset:   neotx.NEOAssert,
+			Value:   neotx.MakeFixed8(amount),
+			Address: address,
+		},
+	}
+
+	err = tx.CalcInputs(vout, utxos)
+
+	if err != nil {
+		return nil, err
+	}
+
+	rawtxdata, txid, err := tx.Tx().Sign(wrapper.key.PrivateKey)
+
+	return &Tx{
+		Data: hex.EncodeToString(rawtxdata),
+		ID:   txid,
+	}, err
+}
+
+// CreateNep5Tx create nep5 transfer transaction
+func (wrapper *Wallet) CreateNep5Tx(asset string, from, to string, gas float64, amount int64, unspent string) (*Tx, error) {
+
+	var utxos []*neogo.UTXO
+
+	if err := json.Unmarshal([]byte(unspent), &utxos); err != nil {
+		return nil, err
+	}
+
+	scriptHash, err := hex.DecodeString(strings.TrimPrefix(asset, "0x"))
+
+	if err != nil {
+		return nil, err
+	}
+
+	scriptHash = reverseBytes(scriptHash)
+
+	bytesOfFrom, err := hex.DecodeString(from)
+
+	if err != nil {
+		return nil, err
+	}
+
+	bytesOfFrom = reverseBytes(bytesOfFrom)
+
+	bytesOfTo, err := hex.DecodeString(to)
+
+	if err != nil {
+		return nil, err
+	}
+
+	bytesOfTo = reverseBytes(bytesOfTo)
+
+	script, err := nep5.Transfer(scriptHash, bytesOfFrom, bytesOfTo, big.NewInt(amount))
+
+	tx := neotx.NewInvocationTx(script, gas)
+
+	err = tx.CalcInputs(nil, utxos)
+
+	if err != nil {
+		return nil, err
+	}
+
+	rawtxdata, txid, err := tx.Tx().Sign(wrapper.key.PrivateKey)
+
+	return &Tx{
+		Data: hex.EncodeToString(rawtxdata),
+		ID:   txid,
+	}, err
+}
+
+func reverseBytes(s []byte) []byte {
+	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
+		s[i], s[j] = s[j], s[i]
+	}
+
+	return s
 }

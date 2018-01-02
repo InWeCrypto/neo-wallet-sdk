@@ -6,6 +6,20 @@ import (
 	"strconv"
 )
 
+// Value .
+type Value struct {
+	Type  string `json:"type"`
+	Value string `json:"value"`
+}
+
+// Nep5Result .
+type Nep5Result struct {
+	State       string   `json:"state"`
+	GasConsumed string   `json:"gas_consumed"`
+	Script      string   `json:"script"`
+	Stack       []*Value `json:"stack"`
+}
+
 // Asset .
 type Asset struct {
 	Asset string `json:"asset"`
@@ -99,6 +113,8 @@ type Transaction struct {
 	Type       string        `json:"Type"`
 	Version    int64         `json:"Version"`
 	Attributes []interface{} `json:"Attributes"` //
+	Script     interface{}   `json:"Script"`
+	Gas        string        `json:"Gas"`
 	Claims     []Claim       `json:"Claims"`
 	Vin        []Vin         `json:"Vin"`
 	Vout       []Vout        `json:"Vout"`
