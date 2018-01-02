@@ -17,7 +17,7 @@
       
       <guid>https://inwecrypto.github.io/neo-wallet-sdk/</guid>
       <description>介绍 neo-wallet-sdk 是由gomobile编译的跨平台NEO钱包SDK当前支持的平台有：
- iOS android  支持特性  资产转账 claim GAS WIF 导入 web3 keystore support  该SDK并不涉及网络部分，需要对应平台自行处理
+ iOS android  支持特性  资产转账 claim GAS WIF 导入 web3 keystore support NEP5合约资产转账 NEP5合约资产ICO（MintToken）  该SDK并不涉及网络部分，需要对应平台自行处理
 SDK 本地接口 创建新钱包  创建新的NEO钱包:
  package com.inwecrypto.test public class App { public static void main(String args[]) { neomobile.Wallet neowallet = neomobile.new_(); } } 请求参数    Parameter Default Description      通过WIF字符串创建钱包  通过WIF字符串创建钱包:
  package com.inwecrypto.test public class App { public static void main(String args[]) { neomobile.</description>
