@@ -189,7 +189,17 @@ func (writer *ScriptWriter) EmitPushInteger(number *big.Int) *ScriptWriter {
 		return writer.Emit(OpCode(byte(PUSH1)-1+byte(number.Int64())), nil)
 	}
 
-	return writer.EmitPushBytes(number.Bytes())
+	data := reverseBytes(number.Bytes())
+
+	return writer.EmitPushBytes(data)
+}
+
+func reverseBytes(s []byte) []byte {
+	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
+		s[i], s[j] = s[j], s[i]
+	}
+
+	return s
 }
 
 // EmitPushBool .
