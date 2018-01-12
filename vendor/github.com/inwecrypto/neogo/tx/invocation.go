@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/inwecrypto/neogo"
+	"github.com/inwecrypto/neogo/rpc"
 )
 
 // InvocationTx .
@@ -39,7 +39,7 @@ func (tx *InvocationTx) Tx() *Transaction {
 }
 
 // CalcInputs .
-func (tx *InvocationTx) CalcInputs(outputs []*Vout, unspent []*neogo.UTXO) error {
+func (tx *InvocationTx) CalcInputs(outputs []*Vout, unspent []*rpc.UTXO) error {
 	invocation := tx.Extend.(*invocationTx)
 
 	base := (*Transaction)(tx)

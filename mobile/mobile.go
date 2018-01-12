@@ -7,9 +7,9 @@ import (
 	"strings"
 
 	"github.com/inwecrypto/bip39"
-	"github.com/inwecrypto/neogo"
 	"github.com/inwecrypto/neogo/keystore"
 	"github.com/inwecrypto/neogo/nep5"
+	"github.com/inwecrypto/neogo/rpc"
 	neotx "github.com/inwecrypto/neogo/tx"
 )
 
@@ -97,7 +97,7 @@ func (wrapper *Wallet) ToKeyStore(password string) (string, error) {
 
 // CreateAssertTx create assert transfer raw tx
 func (wrapper *Wallet) CreateAssertTx(assert, from, to string, amount float64, unspent string) (*Tx, error) {
-	var utxos []*neogo.UTXO
+	var utxos []*rpc.UTXO
 
 	if err := json.Unmarshal([]byte(unspent), &utxos); err != nil {
 		return nil, err
@@ -157,7 +157,7 @@ func (wrapper *Wallet) Mnemonic() (string, error) {
 
 // CreateClaimTx create claim tx
 func (wrapper *Wallet) CreateClaimTx(amount float64, address string, unspent string) (*Tx, error) {
-	var utxos []*neogo.UTXO
+	var utxos []*rpc.UTXO
 
 	if err := json.Unmarshal([]byte(unspent), &utxos); err != nil {
 		return nil, err
@@ -181,7 +181,7 @@ func (wrapper *Wallet) CreateClaimTx(amount float64, address string, unspent str
 
 // MintToken .
 func (wrapper *Wallet) MintToken(asset string, gas, amount float64, unspent string) (*Tx, error) {
-	var utxos []*neogo.UTXO
+	var utxos []*rpc.UTXO
 
 	if err := json.Unmarshal([]byte(unspent), &utxos); err != nil {
 		return nil, err
@@ -230,7 +230,7 @@ func (wrapper *Wallet) MintToken(asset string, gas, amount float64, unspent stri
 // CreateNep5Tx create nep5 transfer transaction
 func (wrapper *Wallet) CreateNep5Tx(asset string, from, to string, gas float64, amount int64, unspent string) (*Tx, error) {
 
-	var utxos []*neogo.UTXO
+	var utxos []*rpc.UTXO
 
 	if err := json.Unmarshal([]byte(unspent), &utxos); err != nil {
 		return nil, err

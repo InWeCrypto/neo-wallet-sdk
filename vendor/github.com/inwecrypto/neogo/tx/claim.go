@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"io"
 
-	"github.com/inwecrypto/neogo"
+	"github.com/inwecrypto/neogo/rpc"
 )
 
 // ClaimTx .
@@ -36,7 +36,7 @@ func (tx *ClaimTx) Tx() *Transaction {
 }
 
 // Claim .
-func (tx *ClaimTx) Claim(amount float64, to string, claims []*neogo.UTXO) error {
+func (tx *ClaimTx) Claim(amount float64, to string, claims []*rpc.UTXO) error {
 
 	var inputs []*Vin
 

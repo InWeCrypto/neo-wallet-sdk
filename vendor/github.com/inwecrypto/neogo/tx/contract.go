@@ -1,6 +1,6 @@
 package tx
 
-import "github.com/inwecrypto/neogo"
+import "github.com/inwecrypto/neogo/rpc"
 
 // ContractTx contract transaction
 type ContractTx Transaction
@@ -20,7 +20,7 @@ func (tx *ContractTx) Tx() *Transaction {
 }
 
 // CalcInputs .
-func (tx *ContractTx) CalcInputs(outputs []*Vout, unspent []*neogo.UTXO) error {
+func (tx *ContractTx) CalcInputs(outputs []*Vout, unspent []*rpc.UTXO) error {
 	base := (*Transaction)(tx)
 
 	vin, _, err := base.CalcInputs(outputs, unspent)

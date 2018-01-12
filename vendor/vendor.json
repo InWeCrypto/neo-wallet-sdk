@@ -3,18 +3,39 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "8G3MdcWpgaVSwl1Yh/n6yJo3w5o=",
+			"origin": "github.com/dynamicgo/config/vendor/github.com/Jeffail/gabs",
+			"path": "github.com/Jeffail/gabs",
+			"revision": "aa9e325b771ca815461890c5e5b9be4e42da1633",
+			"revisionTime": "2017-11-26T15:05:34Z"
+		},
+		{
+			"checksumSHA1": "A6T/YIMYM2QVl8C72utF2whDJ+Q=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/Shopify/sarama",
+			"path": "github.com/Shopify/sarama",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
+		},
+		{
 			"checksumSHA1": "qj/5CGiF+Dsd1/gzKl+8hQ5ByHU=",
 			"origin": "github.com/inwecrypto/neogo/vendor/github.com/apisit/rfc6979",
 			"path": "github.com/apisit/rfc6979",
-			"revision": "a4bbaf0990bd4d66370d82ca9aabf3dd1b6c88e5",
-			"revisionTime": "2018-01-04T08:35:57Z"
+			"revision": "9fb579e4c1e200514f01092906ba31961eff36b7",
+			"revisionTime": "2018-01-11T02:59:52Z"
+		},
+		{
+			"checksumSHA1": "vWHFC42HW6ao7cJ6ihIyc+hZdVM=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/bsm/sarama-cluster",
+			"path": "github.com/bsm/sarama-cluster",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
 		},
 		{
 			"checksumSHA1": "oQgLy8KmIOVov04WXH7KgU1bszc=",
 			"origin": "github.com/inwecrypto/neogo/vendor/github.com/btcsuite/btcutil/base58",
 			"path": "github.com/btcsuite/btcutil/base58",
-			"revision": "a4bbaf0990bd4d66370d82ca9aabf3dd1b6c88e5",
-			"revisionTime": "2018-01-04T08:35:57Z"
+			"revision": "9fb579e4c1e200514f01092906ba31961eff36b7",
+			"revisionTime": "2018-01-11T02:59:52Z"
 		},
 		{
 			"checksumSHA1": "OFu4xJEIjiI8Suu+j/gabfp+y6Q=",
@@ -24,11 +45,108 @@
 			"revisionTime": "2017-07-05T02:17:15Z"
 		},
 		{
+			"checksumSHA1": "FbcM2THHHwG+T4WbruyMPUdB1X8=",
+			"path": "github.com/dynamicgo/config",
+			"revision": "aa9e325b771ca815461890c5e5b9be4e42da1633",
+			"revisionTime": "2017-11-26T15:05:34Z"
+		},
+		{
 			"checksumSHA1": "XmnYB5Ngjy4J0W+GpnpeKfYSGjs=",
 			"origin": "github.com/inwecrypto/neogo/vendor/github.com/dynamicgo/slf4go",
 			"path": "github.com/dynamicgo/slf4go",
-			"revision": "a4bbaf0990bd4d66370d82ca9aabf3dd1b6c88e5",
-			"revisionTime": "2018-01-04T08:35:57Z"
+			"revision": "9fb579e4c1e200514f01092906ba31961eff36b7",
+			"revisionTime": "2018-01-11T02:59:52Z"
+		},
+		{
+			"checksumSHA1": "y2Kh4iPlgCPXSGTCcFpzePYdzzg=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/eapache/go-resiliency/breaker",
+			"path": "github.com/eapache/go-resiliency/breaker",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
+		},
+		{
+			"checksumSHA1": "WHl96RVZlOOdF4Lb1OOadMpw8ls=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/eapache/go-xerial-snappy",
+			"path": "github.com/eapache/go-xerial-snappy",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
+		},
+		{
+			"checksumSHA1": "oCCs6kDanizatplM5e/hX76busE=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/eapache/queue",
+			"path": "github.com/eapache/queue",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
+		},
+		{
+			"checksumSHA1": "QeKwBtN2df+j+4stw3bQJ6yO4EY=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/gin-contrib/sse",
+			"path": "github.com/gin-contrib/sse",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
+		},
+		{
+			"checksumSHA1": "WiW83s6wDjnBhObGhqRON9sJPuY=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/gin-gonic/gin",
+			"path": "github.com/gin-gonic/gin",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
+		},
+		{
+			"checksumSHA1": "M3iXOKdjG7gGxMpQPMI49uqsaQU=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/gin-gonic/gin/binding",
+			"path": "github.com/gin-gonic/gin/binding",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
+		},
+		{
+			"checksumSHA1": "woO1qIxIeQ1bcbPSiMfAKk3r4xg=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/gin-gonic/gin/json",
+			"path": "github.com/gin-gonic/gin/json",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
+		},
+		{
+			"checksumSHA1": "O+2Q4Uc9Vidvc/ctORliL315ZVI=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/gin-gonic/gin/render",
+			"path": "github.com/gin-gonic/gin/render",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
+		},
+		{
+			"checksumSHA1": "YkpuNhq75eI7X98jjtYh5gfsnts=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/go-xorm/builder",
+			"path": "github.com/go-xorm/builder",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
+		},
+		{
+			"checksumSHA1": "zEViql2RV5UZi4mYpV+30Lh8CK8=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/go-xorm/core",
+			"path": "github.com/go-xorm/core",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
+		},
+		{
+			"checksumSHA1": "0RiAbhNbzC5uuZzQ/D14J8+WIqQ=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/go-xorm/xorm",
+			"path": "github.com/go-xorm/xorm",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
+		},
+		{
+			"checksumSHA1": "yqF125xVSkmfLpIVGrLlfE05IUk=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/golang/protobuf/proto",
+			"path": "github.com/golang/protobuf/proto",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
+		},
+		{
+			"checksumSHA1": "p/8vSviYF91gFflhrt5vkyksroo=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/golang/snappy",
+			"path": "github.com/golang/snappy",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
 		},
 		{
 			"checksumSHA1": "Q0s0MtMdjVx9pmYRcLDuA2CZSWc=",
@@ -37,56 +155,116 @@
 			"revisionTime": "2017-11-24T03:30:40Z"
 		},
 		{
+			"checksumSHA1": "K+7e21saGyGY7aegDTzgqUOXwi4=",
+			"path": "github.com/inwecrypto/eth-orders",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
+		},
+		{
+			"checksumSHA1": "Tkk45Uf6rvSFJJhXUPpJOnmR1l8=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/inwecrypto/ethdb",
+			"path": "github.com/inwecrypto/ethdb",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
+		},
+		{
+			"checksumSHA1": "rM4S8j2jSDCRwRP93uKeDMdQBa4=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/inwecrypto/gomq",
+			"path": "github.com/inwecrypto/gomq",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
+		},
+		{
+			"checksumSHA1": "0IPna6NdzJvLTMbsiZKy82RZGXE=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/inwecrypto/gomq-kafka",
+			"path": "github.com/inwecrypto/gomq-kafka",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
+		},
+		{
 			"checksumSHA1": "RROIAUNEsm4vOuHEDwi76eK/TJ4=",
 			"origin": "github.com/inwecrypto/neogo/vendor/github.com/inwecrypto/jsonrpc",
 			"path": "github.com/inwecrypto/jsonrpc",
-			"revision": "a4bbaf0990bd4d66370d82ca9aabf3dd1b6c88e5",
-			"revisionTime": "2018-01-04T08:35:57Z"
+			"revision": "9fb579e4c1e200514f01092906ba31961eff36b7",
+			"revisionTime": "2018-01-11T02:59:52Z"
 		},
 		{
 			"checksumSHA1": "qKe/OzkcXSVrsb/6DvlXzSjojzU=",
 			"origin": "github.com/inwecrypto/neogo/vendor/github.com/inwecrypto/keystore",
 			"path": "github.com/inwecrypto/keystore",
-			"revision": "a4bbaf0990bd4d66370d82ca9aabf3dd1b6c88e5",
-			"revisionTime": "2018-01-04T08:35:57Z"
+			"revision": "9fb579e4c1e200514f01092906ba31961eff36b7",
+			"revisionTime": "2018-01-11T02:59:52Z"
 		},
 		{
-			"checksumSHA1": "ZKhWgFhvKp8fA6Ah6/4EX++jai0=",
+			"checksumSHA1": "KnHBSI7YebyGkCloTDspDaAnEhk=",
 			"path": "github.com/inwecrypto/neogo",
-			"revision": "a4bbaf0990bd4d66370d82ca9aabf3dd1b6c88e5",
-			"revisionTime": "2018-01-04T08:35:57Z"
+			"revision": "9fb579e4c1e200514f01092906ba31961eff36b7",
+			"revisionTime": "2018-01-11T02:59:52Z"
 		},
 		{
 			"checksumSHA1": "dbwF2M+M13WuUsC6pgdqE8MesbU=",
 			"path": "github.com/inwecrypto/neogo/keystore",
-			"revision": "a4bbaf0990bd4d66370d82ca9aabf3dd1b6c88e5",
-			"revisionTime": "2018-01-04T08:35:57Z"
+			"revision": "9fb579e4c1e200514f01092906ba31961eff36b7",
+			"revisionTime": "2018-01-11T02:59:52Z"
 		},
 		{
 			"checksumSHA1": "MWSXKPMzEjtNvHj6DOMfMg8pBrk=",
 			"path": "github.com/inwecrypto/neogo/nep5",
-			"revision": "a4bbaf0990bd4d66370d82ca9aabf3dd1b6c88e5",
-			"revisionTime": "2018-01-04T08:35:57Z"
+			"revision": "9fb579e4c1e200514f01092906ba31961eff36b7",
+			"revisionTime": "2018-01-11T02:59:52Z"
 		},
 		{
-			"checksumSHA1": "of0qCEPrEWS+koNYxq8P+gj/Wgw=",
+			"checksumSHA1": "OuXDV0MzcUMM25Ta5Db+his1rn0=",
 			"path": "github.com/inwecrypto/neogo/tx",
-			"revision": "a4bbaf0990bd4d66370d82ca9aabf3dd1b6c88e5",
-			"revisionTime": "2018-01-04T08:35:57Z"
+			"revision": "9fb579e4c1e200514f01092906ba31961eff36b7",
+			"revisionTime": "2018-01-11T02:59:52Z"
 		},
 		{
 			"checksumSHA1": "sm6sADV6ESYOJmXHfU/D0egDfHc=",
 			"origin": "github.com/inwecrypto/neogo/vendor/github.com/inwecrypto/sha3",
 			"path": "github.com/inwecrypto/sha3",
-			"revision": "a4bbaf0990bd4d66370d82ca9aabf3dd1b6c88e5",
-			"revisionTime": "2018-01-04T08:35:57Z"
+			"revision": "9fb579e4c1e200514f01092906ba31961eff36b7",
+			"revisionTime": "2018-01-11T02:59:52Z"
+		},
+		{
+			"checksumSHA1": "3HVfwgLpCDH8JX211UWdrSi/GU4=",
+			"path": "github.com/lib/pq",
+			"revision": "b609790bd85edf8e9ab7e0f8912750a786177bcf",
+			"revisionTime": "2017-10-22T19:20:43Z"
+		},
+		{
+			"checksumSHA1": "AU3fA8Sm33Vj9PBoRPSeYfxLRuE=",
+			"path": "github.com/lib/pq/oid",
+			"revision": "b609790bd85edf8e9ab7e0f8912750a786177bcf",
+			"revisionTime": "2017-10-22T19:20:43Z"
+		},
+		{
+			"checksumSHA1": "w5RcOnfv5YDr3j2bd1YydkPiZx4=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/mattn/go-isatty",
+			"path": "github.com/mattn/go-isatty",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
 		},
 		{
 			"checksumSHA1": "Se195FlZ160eaEk/uVx4KdTPSxU=",
 			"origin": "github.com/inwecrypto/neogo/vendor/github.com/pborman/uuid",
 			"path": "github.com/pborman/uuid",
-			"revision": "a4bbaf0990bd4d66370d82ca9aabf3dd1b6c88e5",
-			"revisionTime": "2018-01-04T08:35:57Z"
+			"revision": "9fb579e4c1e200514f01092906ba31961eff36b7",
+			"revisionTime": "2018-01-11T02:59:52Z"
+		},
+		{
+			"checksumSHA1": "xKzx54LbkghuMauevGWevn5ip3w=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/pierrec/lz4",
+			"path": "github.com/pierrec/lz4",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
+		},
+		{
+			"checksumSHA1": "zPWRjzsPeXCoqmidIcJtHbvrvRs=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/pierrec/xxHash/xxHash32",
+			"path": "github.com/pierrec/xxHash/xxHash32",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
 		},
 		{
 			"checksumSHA1": "zKKp5SZ3d3ycKe4EKMNT0BqAWBw=",
@@ -96,10 +274,24 @@
 			"revisionTime": "2017-07-05T02:17:15Z"
 		},
 		{
+			"checksumSHA1": "6u6M+ydTkWgOlM+UK+wOYnHhpAU=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/rcrowley/go-metrics",
+			"path": "github.com/rcrowley/go-metrics",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
+		},
+		{
 			"checksumSHA1": "mGbTYZ8dHVTiPTTJu3ktp+84pPI=",
 			"path": "github.com/stretchr/testify/assert",
 			"revision": "890a5c3458b43e6104ff5da8dfa139d013d77544",
 			"revisionTime": "2017-07-05T02:17:15Z"
+		},
+		{
+			"checksumSHA1": "9Zw986fuQM/hCoVd8vmHoSM+8sU=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/github.com/ugorji/go/codec",
+			"path": "github.com/ugorji/go/codec",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
 		},
 		{
 			"checksumSHA1": "1MGpGDQqnUoRpv7VEcQrXOBydXE=",
@@ -111,15 +303,29 @@
 			"checksumSHA1": "y/oIaxq2d3WPizRZfVjo8RCRYTU=",
 			"origin": "github.com/inwecrypto/neogo/vendor/golang.org/x/crypto/ripemd160",
 			"path": "golang.org/x/crypto/ripemd160",
-			"revision": "a4bbaf0990bd4d66370d82ca9aabf3dd1b6c88e5",
-			"revisionTime": "2018-01-04T08:35:57Z"
+			"revision": "9fb579e4c1e200514f01092906ba31961eff36b7",
+			"revisionTime": "2018-01-11T02:59:52Z"
 		},
 		{
 			"checksumSHA1": "0NcipKj1ECwxiIrEHQ0wdoL54Sc=",
 			"origin": "github.com/inwecrypto/neogo/vendor/golang.org/x/crypto/scrypt",
 			"path": "golang.org/x/crypto/scrypt",
-			"revision": "a4bbaf0990bd4d66370d82ca9aabf3dd1b6c88e5",
-			"revisionTime": "2018-01-04T08:35:57Z"
+			"revision": "9fb579e4c1e200514f01092906ba31961eff36b7",
+			"revisionTime": "2018-01-11T02:59:52Z"
+		},
+		{
+			"checksumSHA1": "P/k5ZGf0lEBgpKgkwy++F7K1PSg=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/gopkg.in/go-playground/validator.v8",
+			"path": "gopkg.in/go-playground/validator.v8",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
+		},
+		{
+			"checksumSHA1": "fRgp9UZPllOlkPssv7frzQx4z9A=",
+			"origin": "github.com/inwecrypto/eth-orders/vendor/gopkg.in/yaml.v2",
+			"path": "gopkg.in/yaml.v2",
+			"revision": "e1f8bba24d3681eca18c7cdec811dd4746e3ede2",
+			"revisionTime": "2017-12-27T13:51:48Z"
 		}
 	],
 	"rootPath": "github.com/inwecrypto/neo-wallet-sdk"

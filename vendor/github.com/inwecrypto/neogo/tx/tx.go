@@ -12,7 +12,7 @@ import (
 	"strings"
 
 	"github.com/btcsuite/btcutil/base58"
-	"github.com/inwecrypto/neogo"
+	"github.com/inwecrypto/neogo/rpc"
 )
 
 // Asserts .
@@ -223,7 +223,7 @@ func (tx *Transaction) String() string {
 	return string(data)
 }
 
-type utxoSorter []*neogo.UTXO
+type utxoSorter []*rpc.UTXO
 
 func (s utxoSorter) Len() int      { return len(s) }
 func (s utxoSorter) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
@@ -236,10 +236,10 @@ func (s utxoSorter) Less(i, j int) bool {
 	return ival < jval
 }
 
-func calcTxInput(amount float64, asset string, unspent []*neogo.UTXO) ([]*neogo.UTXO, float64, error) {
+func calcTxInput(amount float64, asset string, unspent []*rpc.UTXO) ([]*rpc.UTXO, float64, error) {
 	sort.Sort(utxoSorter(unspent))
 
-	selected := make([]*neogo.UTXO, 0)
+	selected := make([]*rpc.UTXO, 0)
 	vinvalue := float64(0)
 
 	for _, utxo := range unspent {
@@ -267,8 +267,8 @@ func calcTxInput(amount float64, asset string, unspent []*neogo.UTXO) ([]*neogo.
 	return selected, vinvalue, nil
 }
 
-func filter(unspent []*neogo.UTXO, spent []*neogo.UTXO) []*neogo.UTXO {
-	result := make([]*neogo.UTXO, 0)
+func filter(unspent []*rpc.UTXO, spent []*rpc.UTXO) []*rpc.UTXO {
+	result := make([]*rpc.UTXO, 0)
 
 	for _, utxo := range unspent {
 
@@ -286,7 +286,7 @@ func filter(unspent []*neogo.UTXO, spent []*neogo.UTXO) []*neogo.UTXO {
 }
 
 // CalcInputs calculate tx Inputs
-func (tx *Transaction) CalcInputs(outputs []*Vout, unspent []*neogo.UTXO) ([]*Vin, []*neogo.UTXO, error) {
+func (tx *Transaction) CalcInputs(outputs []*Vout, unspent []*rpc.UTXO) ([]*Vin, []*rpc.UTXO, error) {
 
 	inputs := make([]*Vin, 0)
 
